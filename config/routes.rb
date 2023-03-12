@@ -6,4 +6,6 @@ Rails.application.routes.draw do
       resources :genres_books, only: :create
     end
   end
+
+  get '/books', to: 'books#index'
 end

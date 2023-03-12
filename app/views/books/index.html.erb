@@ -21,7 +21,7 @@
         <td><%= book.release_date %></td>
         <td><%= book.language %></td>
         <td><%= link_to 'Show', category_book_path(book.category, book) %></td>
-        <td><%= link_to 'Edit', edit_category_book_path(@category, book) %></td>
+        <td><%= link_to 'Edit', edit_category_book_path(book.category, book) %></td>
         <td><%= link_to 'Destroy', category_book_path(book.category, book), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -29,5 +29,6 @@
 </table>
 
 <br>
-
-<%= link_to 'New Book', new_category_book_path(@category) %>
+<% if @category.present? %>
+  <%= link_to 'New Book', new_category_book_path(@category) %>
+<% end %>
