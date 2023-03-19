@@ -11,6 +11,15 @@
   </head>
 
   <body>
+    <div style="float: right">
+      <% if student_signed_in? %>
+        <%= link_to "Edit profile", edit_student_registration_path, class: "navbar-link" %> |
+        <%= link_to "Logout", destroy_student_session_path, method: :delete, class: "navbar-link"  %>
+      <% else %>
+        <%= link_to "Sign up", new_student_registration_path, class: "navbar-link"  %> |
+        <%= link_to "Login", new_student_session_path, class: "navbar-link"  %>
+      <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>

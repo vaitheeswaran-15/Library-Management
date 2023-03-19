@@ -21,6 +21,18 @@
 </p>
 
 <p>
+  <strong>Image:</strong>
+  <br>
+  <% if @book.image.attached? %>
+    <%= image_tag @book.image, style: 'width: 200px;' %>
+  <% end %>
+</p>
+
+<%= render 'ratings/index' %>
+<%= render 'ratings/form' %>
+
+
+<p>
   <strong>Genres:</strong>
   <%= @book.genres.pluck(:name).map(&:humanize).join(", ") %>
 </p>
