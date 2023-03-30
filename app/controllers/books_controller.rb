@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
+  load_and_authorize_resource
   before_action :set_category
-  before_action :set_book, only: %i[ show edit update destroy ]
-
+  before_action :set_book, only: %i[show edit update destroy read_status]
   # GET /books or /books.json
   def index
     if @category.present?
@@ -27,6 +27,7 @@ class BooksController < ApplicationController
   # POST /books or /books.json
   def create
     @book = Book.new(book_params)
+    @book.student_id = current_student.id
 
     respond_to do |format|
       if @book.save
@@ -61,7 +62,15 @@ class BooksController < ApplicationController
     end
   end
 
+  def read_status
+    @student = current_student
+    unless @book.book_read_status_ids.include? @student.id
+      @book.book_read_status << @student
+    end
+  end
+
   private
+
   def set_category
     @category = Category.find_by(id: params[:category_id])
   end

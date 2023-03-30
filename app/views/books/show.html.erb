@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<p id="read_status"></p>
 <p>
   <strong>Name:</strong>
   <%= @book.name %>
@@ -46,3 +46,12 @@
 
 <%= link_to 'Edit', edit_category_book_path(@category, @book) %> |
 <%= link_to 'Back', category_books_path(@category) %>
+
+<script>
+    $("#read_status").ready(function(){
+        $.ajax({
+            url :'/categories/' + <%= @category.id %> + '/books/'+ <%= @book.id %>+'/read',
+            type :"POST"
+        });
+    });
+</script>
