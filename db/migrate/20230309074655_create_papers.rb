@@ -1,6 +1,6 @@
-class CreateBooks < ActiveRecord::Migration[5.0]
+class CreatePapers < ActiveRecord::Migration[5.0]
   def change
-    create_table :books do |t|
+    create_table :papers do |t|
       t.string :name
       t.references :category
       t.datetime :release_date

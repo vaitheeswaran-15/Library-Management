@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @paper.name %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @paper.category.name %>
+</p>
+
+<p>
+  <strong>Release date:</strong>
+  <%= @paper.release_date %>
+</p>
+
+<p>
+  <strong>Language:</strong>
+  <%= @paper.language %>
+</p>
+
+<%= link_to 'Edit', edit_category_paper_path(@category, @paper) %> |
+<%= link_to 'Back', category_papers_path(@category) %>
