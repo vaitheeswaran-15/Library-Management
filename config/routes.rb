@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :categories do
     resources :papers do
       resources :comments, only: :create
-      resources :genres_books, only: :create
+      resources :genres_papers, only: :create
     end
   end
 

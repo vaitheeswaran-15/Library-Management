@@ -21,7 +21,7 @@
         <td><%= paper.release_date %></td>
         <td><%= paper.language %></td>
         <td><%= link_to 'Show', category_paper_path(paper.category, paper) %></td>
-        <td><%= link_to 'Edit', edit_category_paper_path(@category, paper) %></td>
+        <td><%= link_to 'Edit', edit_category_paper_path(paper.category, paper) %></td>
         <td><%= link_to 'Destroy', category_paper_path(paper.category, paper), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -29,5 +29,6 @@
 </table>
 
 <br>
-
-<%= link_to 'New Paper', new_category_paper_path(@category) %>
+<% if @category.present? %>
+  <%= link_to 'New Paper', new_category_paper_path(@category) %>
+<% end %>

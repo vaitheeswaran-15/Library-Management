@@ -1,7 +1,7 @@
-<%= form_for [category, book, comment] do |f| %>
+<%= form_for [category, paper, comment] do |f| %>
   <% if comment.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this book from being saved:</h2>
+      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this paper from being saved:</h2>
 
       <ul>
         <% comment.errors.full_messages.each do |message| %>
@@ -17,8 +17,8 @@
   </div>
 
   <div class="field" hidden>
-    <%= f.label :book_id %>
-    <%= f.text_field :book_id, value: book.id %>
+    <%= f.label :paper_id %>
+    <%= f.text_field :paper_id, value: paper.id %>
   </div>
 
   <div class="actions">
