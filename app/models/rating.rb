@@ -1,3 +1,3 @@
 class Rating < ApplicationRecord
-  belongs_to :book, counter_cache: true
+  belongs_to :paper, counter_cache: true
 end

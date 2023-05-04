@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Papers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Release date</th>
+      <th>Language</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @papers.each do |paper| %>
+      <tr>
+        <td><%= paper.name %></td>
+        <td><%= paper.category&.name %></td>
+        <td><%= paper.release_date %></td>
+        <td><%= paper.language %></td>
+        <td><%= link_to 'Show', category_paper_path(paper.category, paper) %></td>
+        <td><%= link_to 'Edit', edit_category_paper_path(paper.category, paper) %></td>
+        <td><%= link_to 'Destroy', category_paper_path(paper.category, paper), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if @category.present? %>
+  <%= link_to 'New Paper', new_category_paper_path(@category) %>
+<% end %>

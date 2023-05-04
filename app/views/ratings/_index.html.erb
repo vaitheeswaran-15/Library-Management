@@ -1,6 +1,6 @@
 <b>Given ratings</b>
 <br>
-<% ratings = @book.ratings.group(:rating).count %>
+<% ratings = @paper.ratings.group(:rating).count %>
 <%= "5 stars - #{ratings[5] || 0}" %>
 <br>
 <%= "4 stars - #{ratings[4] || 0}" %>
