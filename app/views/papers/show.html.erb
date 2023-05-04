@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<p id="read_status"></p>
 <p>
   <strong>Name:</strong>
   <%= @paper.name %>
@@ -46,3 +46,18 @@
 
 <%= link_to 'Edit', edit_category_paper_path(@category, @paper) %> |
 <%= link_to 'Back', category_papers_path(@category) %>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    if(!(<%= current_student.paper_read_status_ids.include?(@paper.id) %>)) {
+      $.ajax({
+        url :'/categories/' + <%= @category.id %> + '/papers/'+ <%= @paper.id %>+'/read',
+        type: "POST",
+        data: {},
+        complete: function (resp) {
+
+        }
+      });
+    }
+  });
+</script>

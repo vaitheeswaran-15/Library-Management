@@ -4,11 +4,11 @@ class Ability
   include CanCan::Ability
 
   def initialize(student)
-    # signed students can read all the books
-    can :read, Book, :all
+    # signed students can read all the papers
+    can :read, Paper, :all
     return unless student
 
-    can :read_status, Book
-    can :manage, Book, student_id: student.id
+    can :read_status, Paper
+    can :manage, Paper, student_id: student.id
   end
 end

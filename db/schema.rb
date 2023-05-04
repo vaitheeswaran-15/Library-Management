@@ -43,26 +43,6 @@ ActiveRecord::Schema.define(version: 2023_03_30_151741) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "book_read_status", id: false, force: :cascade do |t|
-    t.bigint "student_id", null: false
-    t.bigint "book_id", null: false
-    t.index ["student_id", "book_id"], name: "index_book_read_status_on_student_id_and_book_id"
-  end
-
-  create_table "books", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.integer "category_id"
-    t.datetime "release_date"
-    t.string "language"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "student_id"
-    t.integer "comments_count"
-    t.integer "ratings_count"
-    t.index ["category_id"], name: "index_books_on_category_id"
-    t.index ["student_id"], name: "index_books_on_student_id"
-  end
-
   create_table "categories", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "category_code"
@@ -72,10 +52,10 @@ ActiveRecord::Schema.define(version: 2023_03_30_151741) do
   end
 
   create_table "comments", id: :serial, force: :cascade do |t|
-    t.integer "book_id"
+    t.integer "paper_id"
     t.text "comment_text"
     t.bigint "student_id"
-    t.index ["book_id"], name: "index_comments_on_book_id"
+    t.index ["paper_id"], name: "index_comments_on_paper_id"
     t.index ["student_id"], name: "index_comments_on_student_id"
   end
 
@@ -83,19 +63,42 @@ ActiveRecord::Schema.define(version: 2023_03_30_151741) do
     t.string "name"
   end
 
-  create_table "genres_books", id: :serial, force: :cascade do |t|
-    t.integer "book_id"
+  create_table "genres_papers", id: :serial, force: :cascade do |t|
+    t.integer "paper_id"
     t.integer "genre_id"
-    t.index ["book_id"], name: "index_genres_books_on_book_id"
-    t.index ["genre_id"], name: "index_genres_books_on_genre_id"
+    t.index ["genre_id"], name: "index_genres_papers_on_genre_id"
+    t.index ["paper_id"], name: "index_genres_papers_on_paper_id"
+  end
+
+  create_table "paper_read_status", id: false, force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "paper_id", null: false
+    t.index ["student_id", "paper_id"], name: "index_paper_read_status_on_student_id_and_paper_id"
+  end
+
+  create_table "papers", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.integer "category_id"
+    t.datetime "release_date"
+    t.string "language"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "student_id"
+    t.integer "comments_count"
+    t.float "average_rating"
+    t.integer "ratings_count"
+    t.index ["category_id"], name: "index_papers_on_category_id"
+    t.index ["student_id"], name: "index_papers_on_student_id"
   end
 
   create_table "ratings", force: :cascade do |t|
-    t.bigint "book_id", null: false
+    t.bigint "paper_id", null: false
     t.integer "rating"
+    t.bigint "student_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["book_id"], name: "index_ratings_on_book_id"
+    t.index ["paper_id"], name: "index_ratings_on_paper_id"
+    t.index ["student_id"], name: "index_ratings_on_student_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -112,7 +115,7 @@ ActiveRecord::Schema.define(version: 2023_03_30_151741) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "genres_books", "books"
-  add_foreign_key "genres_books", "genres"
-  add_foreign_key "ratings", "books"
+  add_foreign_key "genres_papers", "genres"
+  add_foreign_key "genres_papers", "papers"
+  add_foreign_key "ratings", "papers"
 end

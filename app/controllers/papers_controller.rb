@@ -1,6 +1,8 @@
 class PapersController < ApplicationController
+  load_and_authorize_resource
+  skip_before_action :verify_authenticity_token, only: :read_status
   before_action :set_category
-  before_action :set_paper, only: %i[ show edit update destroy ]
+  before_action :set_paper, only: %i[ show edit update destroy read_status]
 
   # GET /papers or /papers.json
   def index
@@ -23,6 +25,7 @@ class PapersController < ApplicationController
   # POST /papers or /papers.json
   def create
     @paper = Paper.new(paper_params)
+    @paper.student_id = current_student.id
 
     respond_to do |format|
       if @paper.save
@@ -54,6 +57,13 @@ class PapersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to category_papers_url(@category), notice: "Paper was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def read_status
+    @student = current_student
+    unless @paper.paper_read_status_ids.include? @student.id
+      @paper.paper_read_status << @student
     end
   end
 
