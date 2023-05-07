@@ -4,7 +4,7 @@ class PapersController < ApplicationController
 
   # GET /papers or /papers.json
   def index
-    @papers = Paper.all
+    @papers = @category.papers.all
   end
 
   # GET /papers/1 or /papers/1.json
