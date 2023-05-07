@@ -6,7 +6,12 @@ class PapersController < ApplicationController
 
   # GET /papers or /papers.json
   def index
-    @papers = Paper.all
+    if @category.present?
+      @papers = @category.papers.all
+    else
+      @papers = Paper.all
+    end
+    @pagy, @papers = pagy(@papers, items: 10)
   end
 
   # GET /papers/1 or /papers/1.json
