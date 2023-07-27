@@ -9,6 +9,14 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script>
+      (function(d,h,w){var gist=w.gist=w.gist||[];gist.methods=['trackPageView','identify','track','setAppId', 'init'];gist.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);gist.push(e);return gist;}};for(var i=0;i<gist.methods.length;i++){var c=gist.methods[i];gist[c]=gist.factory(c)}s=d.createElement('script'),s.src="https://widget-testing.getgist.com",s.async=!0,e=d.getElementsByTagName(h)[0],e.appendChild(s),s.addEventListener('load',function(e){},!1),gist.init("nmjkgjw6"),gist.trackPageView()})(document,'head',window);
+    </script>
+    <script>
+      document.addEventListener("turbolinks:load", function() {
+        window.gist.trackPageView()
+      })
+    </script>
   </head>
 
   <body>
@@ -22,5 +30,6 @@
       <% end %>
     </div>
     <%= yield %>
+    <div id="turbolink-app" data-turbolinks-permanent></div>
   </body>
 </html>
